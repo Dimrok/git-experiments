@@ -33,7 +33,7 @@ after_script:
   # Add tests status.
   - git checkout "$TRAVIS_COMMIT"
   - git fetch GitHub/meta
-  - git checkout -b meta
+  - git checkout -b GitHub/meta
   - git add -f .meta/
   - git commit -m "$TRAVIS_COMMIT" --allow-empty
   - git push --force GitHub HEAD:refs/heads/meta
