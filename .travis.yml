@@ -1,11 +1,13 @@
 script:
+  - mkdir -p .status
+  - mkdir -p .coverage
   - make
 
 after_script:
   # Add tests status.
   - git checkout "$TRAVIS_COMMIT"
   - git checkout -b meta/tests/$TRAVIS_BRANCH
-  - git add .tests
+  - git add .status
   - git commit -m "$TRAVIS_COMMIT" --allow-empty
   - git push origin HEAD:refs/heads/meta/tests/$TRAVIS_BRANCH
   # Add coverage status.
