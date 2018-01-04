@@ -33,20 +33,14 @@ script:
 after_script:
   # Add tests status.
   - git checkout "$TRAVIS_COMMIT"
-  - git fetch GitHub/meta/status/$TRAVIS_BRANCH
-  - git checkout -b meta/status/$TRAVIS_BRANCH
+  - git fetch GitHub/meta
+  - git checkout -b meta
   - git add .status
-  - git commit -m "$TRAVIS_COMMIT" --allow-empty
-  - git push --force GitHub HEAD:refs/heads/meta/tests/$TRAVIS_BRANCH
-  # Add coverage status.
-  - git checkout "$TRAVIS_COMMIT"
-  - git fetch GitHub/meta/coverage/$TRAVIS_BRANCH
-  - git checkout -b meta/coverage/$TRAVIS_BRANCH
   - git add .coverage
   - git commit -m "$TRAVIS_COMMIT" --allow-empty
-  - git push GitHub HEAD:refs/heads/meta/tests/$TRAVIS_BRANCH
+  - git push --force GitHub HEAD:refs/heads/meta
 
 # blocklist
 branches:
   except:
-  - /^meta/.*$/
+  - meta
