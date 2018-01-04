@@ -34,8 +34,11 @@ after_script:
   - mv .meta .meta.new
   # Go to the last meta branch.
   # FIXME: This doesn't work with parallel builds.
-  - git fetch origin
-  - git checkout origin/meta
+  - git fetch GitHub
+  - git remote
+  - git remote show GitHub
+  - git branch -D meta GitHub/meta
+  - git checkout GitHub/meta
   # Replace old .meta by the new one.
   - rm -rf .meta
   - mv .meta.new .meta
