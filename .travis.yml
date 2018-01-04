@@ -30,13 +30,21 @@ script:
   - make
 
 after_script:
-  # Add tests status.
-  - git checkout "$TRAVIS_COMMIT"
-  - git fetch GitHub/meta
-  - git checkout -b GitHub/meta
-  - git add -f .meta/
+  # Store new .meta so it's not overwritten.
+  - mv .meta .meta.new
+  # Go to the last meta branch.
+  # FIXME: This doesn't work with parallel builds.
+  - git fetch origin
+  - git checkout origin/meta
+  # Replace old .meta by the new one.
+  - rm -rf .meta
+  - mv .meta.new .meta
+  # Add it.
+  - git add -f .meta
+  # Commit using the sha1 of the commit as message.
   - git commit -m "$TRAVIS_COMMIT" --allow-empty
-  - git push --force GitHub HEAD:refs/heads/meta
+  # Push.
+  - git push --force GitHub HEAD:meta
 
 # blocklist
 branches:
